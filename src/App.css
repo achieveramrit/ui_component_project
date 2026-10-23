@@ -1,0 +1,471 @@
+
+:root {
+  font-family: Inter, "Segoe UI", Arial, sans-serif;
+  color: #e8eef8;
+  background: #0a1020;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+.app-shell {
+  width: 100%;
+  max-width: 1800px;
+  margin: 0 auto;
+  padding: 28px;
+}
+
+/* Header */
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 22px;
+}
+
+.eyebrow {
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: #75d7c1;
+  font-weight: 800;
+}
+
+h1 {
+  font-size: 32px;
+  letter-spacing: -0.8px;
+  margin: 7px 0;
+}
+
+.subheading,
+.panel-title p,
+.note,
+.map-footer,
+footer {
+  color: #91a0b9;
+  font-size: 12px;
+}
+
+.subheading {
+  margin: 0;
+}
+
+/* Connection status */
+
+.status {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.7px;
+  color: #ff9c9c;
+  background: #251b2b;
+  padding: 11px 14px;
+  border: 1px solid #493040;
+  border-radius: 30px;
+  white-space: nowrap;
+}
+
+.status.connected {
+  color: #78e3bd;
+  background: #102a2b;
+  border-color: #245b52;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ff6262;
+  flex-shrink: 0;
+}
+
+.connected .status-dot {
+  background: #52dfaa;
+}
+
+/* Panels */
+
+.panel {
+  background: #111b2d;
+  border: 1px solid #25334a;
+  border-radius: 14px;
+  padding: 17px;
+  min-width: 0;
+}
+
+/* WebSocket connection form */
+
+.connect {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.connect-label {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 180px;
+}
+
+.connect-label span {
+  font-size: 11px;
+  color: #91a0b9;
+}
+
+.connect input {
+  flex: 1;
+  min-width: 100px;
+  background: #0a1222;
+  border: 1px solid #31425c;
+  color: #eef4ff;
+  border-radius: 9px;
+  padding: 11px 12px;
+  outline: none;
+}
+
+.connect input:focus {
+  border-color: #4fc9b2;
+}
+
+/* Buttons */
+
+button {
+  border: 1px solid #267d70;
+  background: #176b60;
+  color: #fff;
+  border-radius: 9px;
+  padding: 11px 14px;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    filter 0.15s ease,
+    transform 0.15s ease;
+}
+
+button:hover:not(:disabled) {
+  filter: brightness(1.13);
+}
+
+button:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.secondary {
+  background: #202d42;
+  border-color: #3a4961;
+}
+
+.stop-button {
+  background: #842f42;
+  border-color: #a74457;
+}
+
+/* Statistics cards */
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 13px;
+  margin-bottom: 14px;
+}
+
+.stat span {
+  display: block;
+  color: #93a3bc;
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+
+.stat strong {
+  font-size: 22px;
+}
+
+/* Main dashboard layout
+   Map gets 2/3 of the available width.
+   Camera column gets 1/3. */
+
+.main-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  gap: 14px;
+  align-items: start;
+}
+
+/* Panel headings */
+
+.panel-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.panel-title h2 {
+  font-size: 15px;
+  margin: 0 0 5px;
+}
+
+.panel-title p {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.pill {
+  background: #202e43;
+  color: #aebed3;
+  border-radius: 20px;
+  padding: 6px 9px;
+  font-size: 10px;
+  white-space: nowrap;
+}
+
+/* Live map container */
+
+.map-frame {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 600px;
+  min-height: 600px;
+  max-height: none;
+  overflow: hidden;
+  background: #080e19;
+  border: 1px solid #26364e;
+  border-radius: 10px;
+}
+
+/* Map canvas
+   This enlarges the visible canvas.
+   The JavaScript drawing code must still
+   scale the occupancy grid appropriately. */
+
+.map-frame canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  image-rendering: pixelated;
+}
+
+/* Message displayed when no map is available */
+
+.empty-state {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 18px;
+  color: #8b9bb4;
+  font-size: 13px;
+  pointer-events: none;
+}
+
+/* Map information below canvas */
+
+.map-footer {
+  margin-top: 11px;
+  line-height: 1.6;
+}
+
+/* Camera panels */
+
+.camera-stack {
+  display: grid;
+  gap: 14px;
+  min-width: 0;
+}
+
+.camera-panel {
+  min-width: 0;
+}
+
+.camera-panel img,
+.camera-empty {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+  background: #080e19;
+  border-radius: 9px;
+}
+
+.camera-empty {
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 20px;
+  color: #8192ac;
+  font-size: 12px;
+}
+
+/* Robot controls */
+
+.control-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 14px;
+}
+
+.button-row {
+  display: flex;
+  gap: 9px;
+  flex-wrap: wrap;
+}
+
+.note {
+  line-height: 1.6;
+  margin: 12px 0 0;
+}
+
+.warning {
+  background: #3a2b1c;
+  color: #ffd49b;
+}
+
+/* Manual movement pad */
+
+.motion-pad {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.motion-pad > div {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Footer */
+
+footer {
+  text-align: center;
+  padding: 22px 0 4px;
+}
+
+/* Medium screens and tablets */
+
+@media (max-width: 1100px) {
+  .app-shell {
+    padding: 20px;
+  }
+
+  .main-grid {
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  }
+
+  .map-frame {
+    height: 500px;
+    min-height: 500px;
+  }
+}
+
+/* Tablets and smaller screens */
+
+@media (max-width: 900px) {
+  .main-grid,
+  .control-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .main-grid {
+    align-items: stretch;
+  }
+
+  .map-frame {
+    height: 550px;
+    min-height: 400px;
+  }
+
+  .stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .connect {
+    flex-wrap: wrap;
+  }
+
+  .connect-label {
+    width: 100%;
+  }
+
+  .connect input {
+    flex-basis: 100%;
+  }
+}
+
+/* Mobile screens */
+
+@media (max-width: 560px) {
+  .app-shell {
+    padding: 13px;
+  }
+
+  .header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  h1 {
+    font-size: 27px;
+  }
+
+  .panel {
+    padding: 13px;
+  }
+
+  .stat strong {
+    font-size: 19px;
+  }
+
+  .map-frame {
+    height: 400px;
+    min-height: 350px;
+  }
+
+  .panel-title {
+    align-items: flex-start;
+  }
+
+  .pill {
+    white-space: normal;
+    text-align: center;
+  }
+
+  button {
+    padding: 10px 12px;
+  }
+}
