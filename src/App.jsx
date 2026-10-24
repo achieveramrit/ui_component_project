@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import * as ROSLIB from "roslib";
-const DEFAULT_ROS_URL = 'ws://192.168.1.50:9090'; // Replace with your teammate's ROS laptop IP.
+const DEFAULT_ROS_URL = 'ws://192.168.1.50:9090'; // Replace your teammate's ROS laptop IP.
 
 export default function App() {
   const [rosUrl, setRosUrl] = useState(DEFAULT_ROS_URL);
