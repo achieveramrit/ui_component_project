@@ -1,0 +1,6 @@
+# Face Recognition Service Dependencies
+insightface>=0.7.3
+onnxruntime>=1.15.0
+opencv-python>=4.6.0
+numpy>=1.23.0
+pyrealsense2
